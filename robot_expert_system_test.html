@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Expert System</title>
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #1e1e2f;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            margin-top: 50px;
+            max-width: 500px;
+        }
+
+        h2 {
+            color: #FFD700;
+            margin-bottom: 5px;
+        }
+
+        .welcome-text {
+            font-size: 18px;
+            font-style: italic;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        select, button {
+            font-size: 18px;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 8px;
+            border: none;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        select {
+            background: white;
+            color: black;
+        }
+
+        button {
+            background: #FFD700;
+            color: black;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #FFA500;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+        .robot-image {
+            margin-top: 15px;
+            width: 80%;
+            max-width: 250px;
+            border-radius: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>🤖 Robot Expert System</h2>
+        <p class="welcome-text">A system that’s an expert on expert robots! Let's find the best robot for you. 🚀</p>
+
+        <label for="use_case"><b>Select Use Case:</b></label><br>
+        <select id="use_case">
+            <option value="Home">Home</option>
+            <option value="Factory">Factory</option>
+            <option value="Warehouse">Warehouse</option>
+            <option value="Healthcare">Healthcare</option>
+        </select>
+
+        <br><br>
+
+        <label for="payload"><b>Payload Capacity:</b></label><br>
+        <select id="payload">
+            <option value="Light">Light (0-5 kg)</option>
+            <option value="Medium">Medium (5-20 kg)</option>
+            <option value="Heavy">Heavy (20+ kg)</option>
+        </select>
+
+        <br><br>
+
+        <button onclick="recommendRobot()">Find My Robot</button>
+
+        <div class="result" id="result"></div>
+        <img id="robotImage" class="robot-image" src="" alt="Recommended Robot">
+    </div>
+
+    <script>
+        function recommendRobot() {
+            let useCase = document.getElementById("use_case").value;
+            let payload = document.getElementById("payload").value;
+            let resultDiv = document.getElementById("result");
+            let robotImage = document.getElementById("robotImage");
+
+            let recommendations = {
+                "Home": {
+                    "Light": { name: "Roomba (Vacuum Robot)", img: "images/roomba.jpg" },
+                    "Medium": { name: "Temi (Personal Assistant Robot)", img: "images/temi.jpg" },
+                    "Heavy": { name: "Aethon TUG (Large Home Delivery Robot)", img: "images/tug.jpg" }
+                },
+                "Factory": {
+                    "Light": { name: "KUKA LBR iiwa (Collaborative Robot)", img: "images/kuka.jpg" },
+                    "Medium": { name: "ABB IRB 1600 (Industrial Robot Arm)", img: "images/abb.jpg" },
+                    "Heavy": { name: "Fanuc M-2000iA (Heavy-Duty Robot)", img: "images/fanuc.jpg" }
+                },
+                "Warehouse": {
+                    "Light": { name: "Fetch Robotics (Small Item Picker)", img: "images/fetch.jpg" },
+                    "Medium": { name: "Boston Dynamics Stretch (Warehouse Sorting Robot)", img: "images/stretch.jpg" },
+                    "Heavy": { name: "Kiva Systems (Amazon's Warehouse Robot)", img: "images/kiva.jpg" }
+                },
+                "Healthcare": {
+                    "Light": { name: "Moxi (Hospital Helper Robot)", img: "images/moxi.jpg" },
+                    "Medium": { name: "Da Vinci Surgical System", img: "images/davinci.jpg" },
+                    "Heavy": { name: "Robear (Patient Lifting Robot)", img: "images/robear.jpg" }
+                }
+            };
+
+            let recommendation = recommendations[useCase][payload];
+            resultDiv.innerHTML = `<b>Recommended Robot: </b> ${recommendation.name}`;
+
+            // Update image source
+            robotImage.src = recommendation.img;
+            robotImage.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
