@@ -221,7 +221,7 @@
       let recommendation = recommendations[useCase]?.[payload]?.[price];
       if (recommendation) {
         resultDiv.innerHTML = `<b>Recommended Robot: </b> ${recommendation.name} - ${price} Range`;
-        robotImage.src = recommendation.img;
+        robotImage.src = `https://robot-expert-system.github.io/robot-expert-system/${recommendation.img}`;
         robotImage.style.display = "block";
       } else {
         resultDiv.innerHTML = "No recommendation available for the selected options.";
